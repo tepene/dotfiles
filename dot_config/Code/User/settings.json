@@ -1,0 +1,64 @@
+{
+  // Appearance
+  "window.titleBarStyle": "custom",
+  "window.zoomLevel": 0.5,
+  "workbench.colorTheme": "Monokai",
+
+  // Fonts
+  "editor.fontFamily": "'MonoLisa'",
+  "editor.fontSize": 13,
+  "editor.lineHeight": 0, // When lineHeight is set to zero, VS Code will figure out the the height automatically based on the font
+  "editor.fontLigatures": true, // You can use standard CSS syntax here. To enable ss01 for example, you could set "'ss01' on"
+  "terminal.integrated.fontFamily": "'MonoLisa', 'Symbols Nerd Font Mono'",
+  "terminal.integrated.fontSize": 13,
+
+  // General
+  "update.mode": "manual",
+
+  // Editor Settings
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorStyle": "block",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": false,
+  "editor.semanticHighlighting.enabled": true,
+  "editor.suggestSelection": "first",
+
+  // File Settings
+  "files.trimFinalNewlines": true,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.venv/**": true
+  },
+  // Tasks Settings
+  "task.problemMatchers.neverPrompt": {
+    "shell": true
+  },
+  // -----------------------------------------------------------------------------------------------------
+  // Extensions:
+  // -----------------------------------------------------------------------------------------------------
+  // Prettier
+  "prettier.tabWidth": 2,
+  // Peacock
+  "peacock.affectActivityBar": false,
+  "peacock.affectStatusBar": true,
+  "peacock.affectTitleBar": false,
+  "peacock.surpriseMeOnStartup": false,
+  "workbench.startupEditor": "none",
+  // Docker
+  "docker.images.groupBy": "Repository",
+  // NeoVim
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "vscode-neovim.logOutputToConsole": true,
+  "vscode-neovim.logLevel": "info",
+  // Redhat
+  "redhat.telemetry.enabled": false,
+  // Remote Development
+  "remote.autoForwardPortsSource": "hybrid"
+}
