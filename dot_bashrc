@@ -24,10 +24,11 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-# Custom - VSCode devcontainer (https://code.visualstudio.com/docs/remote/containers)
-export VSCODE_ROOT_DIR=$HOME/Code
-export VSCODE_DEVCONTAINER_SHARE=$VSCODE_ROOT_DIR/__devcontainer
-export VSCODE_ANSIBLE_DEV_ROOT=$VSCODE_ROOT_DIR/gitlab.com/anyweb/ansible
-export GPG_TTY=$(tty)
-# TODO: Add python development dependencies
+# Load environment variables
+source ~/.config/x_shell/env
 
+[[ -f /usr/share/bash-prexec ]] && source /usr/share/bash-prexec
+[[ "$(command -v atuin)" ]] && eval "$(atuin init bash)"
+
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init bash)"
