@@ -1,0 +1,11 @@
+# Load default bluefin-dx settings
+source /etc/zsh/zshrc
+
+# Load environment variables
+source ~/.config/x_shell/env
+
+# Atuin
+[[ "$(command -v atuin)" ]] && eval "$(atuin init zsh)"
+
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init zsh)"
