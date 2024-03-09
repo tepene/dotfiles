@@ -1,0 +1,9 @@
+# Custom environment variables
+# all of them are loaded in ~/.bashrc and ~/.zshrc
+
+## VSCode devcontainer (https://code.visualstudio.com/docs/remote/containers)
+export VSCODE_ROOT_DIR=$HOME/Code
+export VSCODE_DEVCONTAINER_SHARE=$VSCODE_ROOT_DIR/__devcontainer
+export VSCODE_ANSIBLE_DEV_ROOT=$VSCODE_ROOT_DIR/gitlab.com/anyweb/ansible
+export GPG_TTY=$(tty)
+
