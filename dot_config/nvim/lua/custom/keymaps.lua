@@ -1,5 +1,9 @@
 -- Netrw - vim's builtin file explorer
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "Open file [e]xplorer (NETRW)" })
+vim.keymap.set("n", "<leader>ex", vim.cmd.Ex, { desc = "Open file [ex]plorer (NETRW)" })
+
+-- Split windows
+vim.keymap.set("n", "<leader>th", ":split<CR>", { desc = "Split [t]ab [h]orizontally" })
+vim.keymap.set("n", "<leader>tv", ":vsplit<CR>", { desc = "Split [t]ab [v]ertically" })
 
 -- Select text
 vim.keymap.set({ "n", "v" }, "<leader>ha", "ggVG", { desc = "[h]ighlight [a]ll" })
