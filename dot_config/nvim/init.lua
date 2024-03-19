@@ -74,7 +74,7 @@ If you experience any errors while trying to install kickstart, run `:checkhealt
 
 --]]
 
--- Last integration of upstream changes & fixes 2024-03-12
+-- Last integration of upstream changes & fixes 2024-03-18
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -109,7 +109,8 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- [[ Install plugins from plugins directory ]]
 require("lazy").setup({
-	spec = "plugins",
+	{ import = "custom/plugins" },
+	{ import = "kickstart/plugins" },
 	change_detection = { notify = false },
 }, {
 	ui = {
