@@ -7,5 +7,5 @@ if [ "${DEVPOD}" == "true" ]; then
 	mkdir -p "${XDG_CONFIG_HOME}"
 	sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "${HOME}/.local/bin"
 	chezmoi init https://github.com/tepene/dotfiles.git
-	chezmoi app --force "${XDG_CONFIG_HOME}/nvim"
+	chezmoi apply --force "${XDG_CONFIG_HOME}/nvim"
 fi
