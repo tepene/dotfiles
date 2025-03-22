@@ -1,0 +1,43 @@
+# Ghostty configuration
+## -> https://ghostty.org/docs/config
+
+# Theme
+theme = tokyonight_moon
+
+# Font
+font-family = MonoLisa
+font-family = Symbols Nerd Font Mono
+
+# Keybindings
+## Reload the configuration -> CH-DE keyboard shift+, = ;
+keybind = ctrl+shift+,=unbind
+keybind = ctrl+shift+;=reload_config
+
+## Create a new split in the given direction. -> familiar vim keymaps
+### left
+keybind = ctrl+shift+h=new_split:left
+### right
+keybind = ctrl+shift+o=unbind
+keybind = ctrl+shift+l=new_split:right
+### down
+keybind = ctrl+shift+e=unbind
+keybind = ctrl+shift+j=new_split:down
+### up
+keybind = ctrl+shift+k=new_split:up
+
+## Focus on a split in a given direction
+### left
+keybind = ctrl+alt+left=unbind
+keybind = ctrl+alt+h=goto_split:left
+### right
+keybind = ctrl+alt+right=unbind
+keybind = ctrl+alt+l=goto_split:right
+### down
+keybind = ctrl+alt+down=unbind
+keybind = ctrl+alt+j=goto_split:down
+### up
+keybind = ctrl+alt+up=unbind
+keybind = ctrl+alt+k=goto_split:up
+
+## Close the current "surface", whether that is a window, tab, split
+keybind = ctrl+shift+x=close_surface
