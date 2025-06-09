@@ -15,6 +15,10 @@ packages:
       state: present
     - name: tldr
       state: present
+    - name: glab
+      state: present
+    - name: gh
+      state: present
   flatpak:
     - name: org.keepassxc.KeePassXC
       state: present
