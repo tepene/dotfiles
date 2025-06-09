@@ -1,0 +1,97 @@
+---
+packages:
+  brew:
+    - name: fzf
+      state: present
+    - name: ripgrep
+      state: present
+    - name: fd
+      state: present
+    - name: neovim
+      state: present
+    - name: lazygit
+      state: present
+    - name: poetry
+      state: present
+    - name: tldr
+      state: present
+  flatpak:
+    - name: org.keepassxc.KeePassXC
+      state: present
+    - name: org.wireshark.Wireshark
+      state: present
+    - name: org.gnome.DejaDup
+      state: absent
+    - name: org.gnome.Weather
+      state: absent
+    - name: app.zen_browser.zen
+      state: present
+    - name: ca.desrt.dconf-editor
+      state: present
+    - name: https://releases.threema.ch/flatpak/threema-desktop/ch.threema.threema-desktop.flatpakref
+      state: present
+    - name: com.calibre_ebook.calibre
+      state: present
+    - name: com.discordapp.Discord
+      state: present
+    - name: com.github.PintaProject.Pinta
+      state: present
+    - name: com.jgraph.drawio.desktop
+      state: present
+    - name: com.logseq.Logseq
+      state: present
+    - name: com.protonvpn.www
+      state: present
+    - name: com.prusa3d.PrusaSlicer
+      state: present
+    - name: com.slack.Slack
+      state: present
+    - name: com.spotify.Client
+      state: present
+    - name: com.usebruno.Bruno
+      state: present
+    - name: eu.scarpetta.PDFMixTool
+      state: present
+    - name: md.obsidian.Obsidian
+      state: present
+    - name: me.proton.Mail
+      state: present
+    - name: me.proton.Pass
+      state: present
+    - name: net.displaycal.DisplayCAL
+      state: present
+    - name: nl.hjdskes.gcolor3
+      state: present
+    - name: org.libreoffice.LibreOffice
+      state: present
+    - name: org.signal.Signal
+      state: present
+  gnome_extensions:
+    - name: space-bar
+      uuid: space-bar@luchrioh
+      state: present
+      enabled: true
+    - name: search-light
+      uuid: search-light@icedman.github.com
+      state: present
+      enabled: true
+    - name: dash-to-dock
+      uuid: dash-to-dock@micxgx.gmail.com
+      state: present
+      enabled: false
+    - name: tactile
+      uuid: tactile@lundal.io
+      state: present
+      enabled: true
+    - name: focus-changer
+      uuid: focus-changer@heartmire
+      state: present
+      enabled: true
+    - name: just-perfection
+      uuid: just-perfection-desktop@just-perfection
+      state: present
+      enabled: true
+    - name: auto-move-windows
+      uuid: auto-move-windows@gnome-shell-extensions.gcampax.github.com
+      state: present
+      enabled: true

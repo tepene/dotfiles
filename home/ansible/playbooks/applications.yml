@@ -1,0 +1,42 @@
+---
+- name: Manage applications
+  hosts: bluefin
+  connection: local
+  vars_files:
+    - "{{ playbook_dir }}/vars/packages.yml"
+  tasks:
+    - name: Add applications
+      block:
+        - name: Install Flatpak applications
+          community.general.flatpak:
+            name: "{{ packages | ansible.builtin.json_query(__json_query) }}"
+            method: system
+            state: present
+          become: true
+          vars:
+            __json_query: flatpak[?state==`present`].name
+
+        - name: Install homebrew applications
+          community.general.homebrew:
+            name: "{{ packages | ansible.builtin.json_query(__json_query) }}"
+            state: present
+          vars:
+            __json_query: brew[?state==`present`].name
+
+    - name: Remove applications
+      block:
+        - name: Uninstall flatpak applications
+          community.general.flatpak:
+            name: "{{ packages | ansible.builtin.json_query(__json_query) }}"
+            method: system
+            state: absent
+          become: true
+          vars:
+            __json_query: flatpak[?state==`absent`].name
+        
+        - name: Uninstall homebrew applications
+          community.general.homebrew:
+            name: "{{ packages | ansible.builtin.json_query(__json_query) }}"
+            state: present
+          vars:
+            __json_query: brew[?state==`abasent`].name

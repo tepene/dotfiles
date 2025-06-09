@@ -1,0 +1,4 @@
+# https://www.chezmoi.io/reference/special-files/chezmoiignore/
+
+## Ansible playbooks and configuration
+ansible

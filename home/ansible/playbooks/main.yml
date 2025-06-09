@@ -1,0 +1,6 @@
+---
+- name: Managei applications
+  ansible.builtin.import_playbook: applications.yml
+
+- name: Manage Gnome settings
+  ansible.builtin.import_playbook: gnome.yml

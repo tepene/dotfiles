@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+## Check if configuration files have changed
+# packages.yml hash: {{ include "ansible/playbooks/vars/packages.yml" | sha256sum }}
+# dconf.ini hash: {{ include "ansible/playbooks/files/dconf.ini" | sha256sum }}
+
+## Run ansible-playbook
+export CHEZMOI_ANSIBLE_DIR="${HOME}/.local/share/chezmoi/home/ansible"
+export ANSIBLE_CALLBACK_RESULT_FORMAT="yaml"
+export ANSIBLE_CALLBACKS_ENABLED="ansible.posix.profile_tasks"
+
+echo "Found changes in packages.yml and dconf.ini"
+echo "Starting Desktop provisioning..."
+ansible-playbook "${CHEZMOI_ANSIBLE_DIR}/playbooks/main.yml" --inventory "${CHEZMOI_ANSIBLE_DIR}/inventory.yml" --ask-become-pass

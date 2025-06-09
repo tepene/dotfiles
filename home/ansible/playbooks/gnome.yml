@@ -1,0 +1,98 @@
+- name: Manage Gnome
+  hosts: bluefin
+  connection: local
+  vars:
+    gnome_exension_base_url: https://extensions.gnome.org
+    gnome_version: "{{ result_command_gnome_version.stdout| regex_search(__regex_gnome_version, '\\1') | first }}"
+    gnome_extension_download_dir: "{{ ansible_env.HOME }}/Downloads/gnome-extensions"
+    __regex_gnome_version: (\d+).(\d+)
+  vars_files:
+    - "{{ playbook_dir }}/vars/packages.yml"
+  pre_tasks:
+    - name: Evaluate gnome-shell version
+      ansible.builtin.command:
+        cmd: gnome-shell --version
+      register: result_command_gnome_version
+
+    - name: Get Gnome Shell extension download info
+      ansible.builtin.uri:
+        url: "{{ gnome_exension_base_url }}/extension-info/?uuid={{ item }}&shell_version={{ gnome_version }}"
+        method: GET
+      loop: "{{ packages | ansible.builtin.json_query(__json_query) }}"
+      vars:
+        __json_query: gnome_extensions[?state==`present`].uuid
+      register: result_uri_gnome_extension_info
+
+    - name: Check for installed Gnome extensions
+      ansible.builtin.command:
+        cmd: gnome-extensions list
+      register: result_command_gnome_extension_list
+    
+  tasks:
+    - name: Add Gnome extensions
+      block:
+        - name: Create temporary gnome extension download directory
+          ansible.builtin.file:
+            path: "{{ gnome_extension_download_dir }}"
+            state: directory
+            mode: 0755
+
+        - name: Download Gnome extensions
+          when: item.json.uuid not in result_command_gnome_extension_list.stdout_lines
+          ansible.builtin.uri:
+            url: "{{ gnome_exension_base_url }}{{ item.json.download_url }}"
+            method: GET
+            dest: "{{ gnome_extension_download_dir }}"
+          loop: "{{ result_uri_gnome_extension_info.results }}"
+          loop_control:
+            label: "{{ item.json.uuid }}"
+
+        - name: Install Gnome extensions
+          ansible.builtin.command:
+            cmd: "gnome-extensions install --force {{ item }}" # TODO: disable force once installation without user interaction works
+          with_fileglob: "{{ gnome_extension_download_dir }}/*.zip"
+
+        - name: Delete temporary gnome extension download directory
+          ansible.builtin.file:
+            path: "{{ gnome_extension_download_dir }}"
+            state: absent
+            mode: 0755
+
+        - name: Activate Gnome extensions
+          ansible.builtin.command:
+            cmd: "gnome-extensions enable {{ item }} -q"
+          loop: "{{ packages | ansible.builtin.json_query(__json_query) }}"
+          loop_control:
+            label: "{{ item }}"
+          vars:
+            __json_query: gnome_extensions[?state==`present` && enabled==`true`].uuid
+
+        # TODO: Install GNOME extensions from the command line without user interaction 
+        # ! currently not possible !
+        # -> Exensions is only visible after logout & enabling only works after that
+        # -> https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/7469
+
+    - name: Add Gnome extensions
+      block:
+        - name: Disable gnome extension
+          ansible.builtin.command:
+            cmd: "gnome-extensions disable {{ item }} -q"
+          loop: "{{ packages | ansible.builtin.json_query(__json_query) }}"
+          loop_control:
+            label: "{{ item }}"
+          vars:
+            __json_query: gnome_extensions[?enabled==`false`].uuid
+
+        - name: Uninstall gnome extension
+          ansible.builtin.command:
+            cmd: "gnome-extensions uninstall {{ item }} -q"
+          loop: "{{ packages | ansible.builtin.json_query(__json_query) }}"
+          loop_control:
+            label: "{{ item }}"
+          vars:
+            __json_query: gnome_extensions[?state==`absent`].uuid
+
+    - name: Load custom Gnome dconf configuration
+      ansible.builtin.shell:
+        cmd: "dconf load / < dconf.ini"
+        chdir: "{{ playbook_dir }}/files"
