@@ -70,6 +70,8 @@ packages:
       state: present
     - name: org.signal.Signal
       state: present
+    - name: io.gitlab.news_flash.NewsFlash
+      state: present
   gnome_extensions:
     - name: space-bar
       uuid: space-bar@luchrioh
