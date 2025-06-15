@@ -1,23 +1,55 @@
 ---
 packages:
   brew:
-    - name: fzf
+    # bluefin-cli -> /usr/share/ublue-os/homebrew/bluefin-cli.Brewfile    
+    - name: atuin
       state: present
-    - name: ripgrep
+    - name: bat
+      state: present
+    - name: bash-preexec
+      state: present
+    - name: direnv
+      state: present
+    - name: dysk
+      state: present
+    - name: eza
       state: present
     - name: fd
       state: present
-    - name: neovim
-      state: present
-    - name: lazygit
-      state: present
-    - name: poetry
-      state: present
-    - name: tldr
+    - name: gh
       state: present
     - name: glab
       state: present
-    - name: gh
+    - name: ripgrep
+      state: present
+    - name: starship
+      state: present
+    - name: shellcheck
+      state: present
+    - name: stress-ng
+      state: present
+    - name: tealdeer
+      state: present
+    - name: trash-cli
+      state: present
+    - name: television
+      state: present
+    - name: uutils-coreutils
+      state: present
+    - name: ugrep
+      state: present
+    - name: yq
+      state: present
+    - name: zoxide
+      state: present
+    # additional for development with lazyvim
+    - name: fzf
+      state: present
+    - name: neovim
+      state: present
+    - namne: devcontainer
+      state: present
+    - name: lazygit
       state: present
   flatpak:
     - name: org.keepassxc.KeePassXC
